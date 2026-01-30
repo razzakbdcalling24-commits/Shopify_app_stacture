@@ -41,16 +41,7 @@ if (host === "localhost") {
 
 
 export default defineConfig({
-  css: {
-    preprocessorOptions: {
-      scss: {
-        quietDeps: true,
-      },
-    },
-  },
-  ssr: {
-    noExternal: ["@shopify/polaris"], 
-  },
+
   server: {
     allowedHosts: [host],
     cors: {
