@@ -1,7 +1,7 @@
 
 import { boundary } from "@shopify/shopify-app-react-router/server";
 import { authenticate } from "../shopify.server";
-import { Card, Page } from "@shopify/polaris";
+import {Page, Grid, LegacyCard} from '@shopify/polaris';
 
 export const loader = async ({ request }) => {
   await authenticate.admin(request);
@@ -13,8 +13,19 @@ export default function Index() {
  
 
   return (
-    <Page>
-           <Card>The App is Running </Card> 
+   <Page fullWidth>
+      <Grid>
+        <Grid.Cell columnSpan={{xs: 6, sm: 3, md: 3, lg: 6, xl: 6}}>
+          <LegacyCard title="Sales" sectioned>
+            <p>View a summary of your online store’s sales.</p>
+          </LegacyCard>
+        </Grid.Cell>
+        <Grid.Cell columnSpan={{xs: 6, sm: 3, md: 3, lg: 6, xl: 6}}>
+          <LegacyCard title="Orders" sectioned>
+            <p>View a summary of your online store’s orders.</p>
+          </LegacyCard>
+        </Grid.Cell>
+      </Grid>
     </Page>
           
   );
