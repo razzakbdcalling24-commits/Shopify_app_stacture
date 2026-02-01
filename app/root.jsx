@@ -1,24 +1,13 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
-import polarisStyles from "@shopify/polaris/build/esm/styles.css?url";
-import { useEffect, useState } from "react";
-
+import { AppProvider } from "@shopify/polaris";
+import translations from "@shopify/polaris/locales/en.json";
 export const links = () => [
-  { rel: "preconnect", href: "https://cdn.shopify.com" },
-  { rel: "stylesheet", href: polarisStyles },
+  { rel: "stylesheet", href: "https://unpkg.com/@shopify/polaris@latest/build/esm/styles.css" },
 ];
-
-
 
 
 export default function Root() { 
 
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    // CSS load হওয়ার জন্য short delay
-    const timer = setTimeout(() => setReady(true), 300);
-    return () => clearTimeout(timer);
-  }, []);
 
 
   return (
@@ -28,10 +17,17 @@ export default function Root() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />     
         <Meta />
         <Links />
-
+           <script type="module" src="https://cdn.jsdelivr.net/npm/@shopify/polaris-elements@latest/dist/polaris-elements/polaris-elements.esm.js"></script>
+            <link rel="stylesheet" href="https://unpkg.com/@shopify/polaris@latest/build/esm/styles.css"/>
       </head>
       <body>
-        <Outlet />
+        <AppProvider i18n={translations}>
+   <Outlet />
+</AppProvider>
+        <script 
+          type="module" 
+          src="https://cdn.jsdelivr.net/npm/@shopify/polaris-elements@latest/dist/polaris-elements/polaris-elements.esm.js"
+        ></script>
         <ScrollRestoration />
         <Scripts />
       </body>

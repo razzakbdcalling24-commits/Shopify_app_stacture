@@ -1,13 +1,7 @@
 import { Outlet, useLoaderData } from "react-router";
 import { NavMenu } from "@shopify/app-bridge-react";
 import { authenticate } from "../shopify.server";
-import {
-  AppProvider as PolarisProvider,
-  Frame,
-  Spinner
-} from "@shopify/polaris";
 import { AppProvider as ShopifyProvider } from "@shopify/shopify-app-react-router/react";
-import enTranslations from "@shopify/polaris/locales/en.json";
 import { useEffect, useState } from "react";
 
 export const loader = async ({ request }) => {
@@ -25,22 +19,9 @@ export default function App() {
   }, []);
 
   return (
-    <PolarisProvider i18n={enTranslations}>
+ 
       <ShopifyProvider embedded apiKey={apiKey}>
-        <Frame>
-          {loading ? (
-            <div
-              style={{
-                height: "100vh",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Spinner size="large" />
-            </div>
-          ) : (
-            <>
+   
               <NavMenu>
                 <a href="/app">Home</a>
                 <a href="/app/p">Products</a>
@@ -48,10 +29,9 @@ export default function App() {
               </NavMenu>
 
               <Outlet />
-            </>
-          )}
-        </Frame>
+        
+      
       </ShopifyProvider>
-    </PolarisProvider>
+  
   );
 }
